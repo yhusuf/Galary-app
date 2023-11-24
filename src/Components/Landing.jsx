@@ -10,7 +10,7 @@ const Landing = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`https://api.unsplash.com/photos/random?count=10&page=${page}&client_id=${import.meta.env.VITE_ACCESS_KEY}`);
+      const response = await axios.get(`https://api.unsplash.com/photos/random?count=10&page=${page}&client_id=${process.env.REACT_APP_ACCESS_KEY}`);
       const newData = response.data.filter((item) => !columns.some(column => column.map(i => i.id).includes(item.id)));
       setData((prevData) => [...prevData, ...newData]);
     } catch (error) {
