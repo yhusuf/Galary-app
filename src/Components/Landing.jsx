@@ -67,8 +67,8 @@ const Landing = () => {
 };
 const Body =styled.div`
   *{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 `
 
@@ -76,14 +76,17 @@ const RowContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -10px; 
+  justify-content: center;
   @media (max-width: 900px) {
     justify-content: space-between;
   }
 `;
 
 const Column = styled.div`
+  justify-content: center;
+  align-items: center;
   flex: 0 0 calc(33.3333% - 20px); 
-  margin: 0 10px; 
+  margin: 0 5px; 
   @media (max-width: 900px) {
     flex: 0 0 calc(50% - 20px);
   }
@@ -95,7 +98,7 @@ const Column = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
-  margin-bottom: 10px; 
+  margin-bottom: 20px; 
   overflow: hidden;
 `;
 

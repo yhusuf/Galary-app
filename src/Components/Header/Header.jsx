@@ -23,7 +23,7 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 80vh;
   align-items: center;
   justify-content: center;
   background-color: #fff;
