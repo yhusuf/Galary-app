@@ -1,19 +1,24 @@
 import styled from "styled-components";
 import './Header.css';
 import Search from "../Search";
+import Navbar from "../Navbar/Navbar";
 
 function Header() {
     
   return (
     <main>
-    <StyledContainer className="dark">
+    <StyledContainer >
+    <Navbar/>
         <AbsoluteOverlay>
             <StyledDiv className="jumbo"></StyledDiv>
         </AbsoluteOverlay>
-        <StyledH1 className='dark' >
-        AWESOME FREE STOCK PHOTOS,LIT IMAGES SHARED BY CREATORS.
-        <Search/> 
+        <StyledH1 >
+        High-quality stock photos, royalty free images, shared by creators.
+        <div className="search"><Search/></div>  
         </StyledH1>
+        <Last>
+          <h3>trending</h3>
+        </Last>
     </StyledContainer>
 </main>
   )
@@ -24,13 +29,11 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 80vh;
-  align-items: center;
   justify-content: center;
-  background-color: #fff;
-  transition: background-color 0.3s ease; 
-
-  &.dark {
-    background-color: #000; 
+  background-color: #000; 
+  transition: background-color 0.3s ease;
+  @media (max-width:320px){
+    height: 100vh;
   }
 `;
 const AbsoluteOverlay = styled.div`
@@ -49,22 +52,38 @@ const StyledH1 = styled.h1`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 33px;
+  font-weight: 600;
   color: #fff;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  max-width: 660px;
+  max-width: 760px;
   margin: auto;
   text-align: center;
-  padding: 20px;
+  text-transform: uppercase;
+  .search{
+    width: 100%;
+    justify-content:center ;
+    align-items: center;
+    padding: 1rem 3rem; 
+    align-self: center;
+  }
+  @media (max-width:320px){
+    top: -60px;
+    font-weight: 500;
+    line-height: 40px;
+  }
 
   @media (max-width: 768px) {
-    font-size: 2rem;
-    max-width: 90%;
+    max-width: 100%;
+    padding: 1rem;
   }
 `;
 
-
+const Last = styled.div`
+h3{
+  color: white;
+}
+`
 
 
 export default Header
