@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {close,menu} from '../../assets';
 import {navLinks} from  '../../Constants/Constant';
 import { GiFloatingGhost } from "react-icons/gi";
+import {Navlink} from 'react-router-dom'
 
 function Navbar() {
     const [toggle, SetToggle] = useState(false);
@@ -12,10 +13,12 @@ function Navbar() {
       <nav className="w-full flex py-6 justify-between item-center navbar">
         <div className='flex'>
           <div className='cursor-pointer flex'>
-            <div className='p-[5px] relative bottom-1'>
+          <Navlink to={'/'}>
+          <div className='p-[5px] relative bottom-1'>
               <GiFloatingGhost className='text-[30px] h-[32px]' style={{color:'white'}}/>
             </div>
-              <h2 className='hidden cursor-pointer sm:block justify-center items-center text-2xl ml-4 font-poppins font-semibold text-white'>Imagixx</h2>
+              <h2 className='hidden cursor-pointer sm:block justify-center items-center text-2xl ml-4 font-poppins font-semibold text-white'>Imagixx</h2> 
+          </Navlink>
             </div>
         </div>
         <ul className="list-none hidden justify-end item-center sm:flex">

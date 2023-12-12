@@ -1,17 +1,22 @@
 import { useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Footer from '../Components/Navbar/Footer';
+import Navbar from '../Components/Navbar/Navbar';
 
-const Landing = () => {
+const Searched = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [columns, setColumns] = useState([[], [], []]);
+  let params = useParams();
 
-  const fetchData = async () => {
+  const fetchData = async (name) => {
     try {
-      const response = await axios.get(`https://api.unsplash.com/photos/random?count=10&page=${page}&client_id=${process.env.REACT_APP_ACCESS_KEY}`);
-      const newData = response.data.filter((item) => !columns.some(column => column.map(i => i.id).includes(item.id)));
+      const response = await axios.get(`https://api.unsplash.com/search/photos?count=10&query=${name}&page=${page}&client_id=${process.env.REACT_APP_ACCESS_KEY}`);
+      const newData = response.data.results.filter((item) => !columns.some(column => column.map(i => i.id).includes(item.id)));
+      console.log(newData, response);
       setData((prevData) => [...prevData, ...newData]);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -19,9 +24,9 @@ const Landing = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(params.data);
     // eslint-disable-next-line 
-  }, [page]);
+  }, [params.data]);
 
   useEffect(() => {
     const newColumns = [...columns];
@@ -40,7 +45,6 @@ const Landing = () => {
     try {
       const response = await fetch(url);
       const blob = await response.blob();
-
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = `photo_${id}`;
@@ -56,19 +60,21 @@ const Landing = () => {
     }
   };
   return (
-    <Body>
-      <div>
-        <Heading>
-          Free Stock Photos
-        </Heading>
-      </div>
-    <InfiniteScroll
-      dataLength={data.length}
-      next={() => setPage((prevPage) => prevPage + 1)}
-      hasMore={true}
-      loader={<LoadingPlaceholder key="loading">Loading...</LoadingPlaceholder>}
-      style={{ overflow: 'hidden' }}
-    >
+    <div>
+        <Navbar/>
+        <Body>
+            <div>
+                <Heading>
+                {params.search} result.
+                </Heading>
+            </div>
+            <InfiniteScroll
+            dataLength={data.length}
+            next={() => setPage((prevPage) => prevPage + 1)}
+             hasMore={true}
+            loader={<LoadingPlaceholder key="loading">Loading...</LoadingPlaceholder>}
+            style={{ overflow: 'hidden' }}
+            >
       <RowContainer>
         {columns.map((column, columnIndex) => (
           <Column key={columnIndex}>
@@ -89,6 +95,9 @@ const Landing = () => {
       </RowContainer>
     </InfiniteScroll>
     </Body>
+    <Footer/>
+    </div>
+   
   );
 };
 const Body =styled.div`
@@ -174,4 +183,4 @@ const DownloadButton = styled.button`
   cursor: pointer;
 `;
 
-export default Landing;
+export default Searched;

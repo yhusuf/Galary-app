@@ -2,24 +2,29 @@ import styled from "styled-components";
 import './Header.css';
 import Search from "../Search";
 import Navbar from "../Navbar/Navbar";
+import Stat from "../Stat";
+
 
 function Header() {
     
   return (
     <main>
     <StyledContainer >
-    <Navbar/>
+        <Navbar/>
         <AbsoluteOverlay>
             <StyledDiv className="jumbo"></StyledDiv>
         </AbsoluteOverlay>
-        <StyledH1 >
-        High-quality stock photos, royalty free images, shared by creators.
-        <div className="search"><Search/></div>  
+          <StyledH1 >
+            High-quality stock photos, royalty-free images, shared by creators.
+          <div className="search">
+            <Search/>
+          </div>  
         </StyledH1>
-        <Last>
-          <h3>trending</h3>
-        </Last>
+        <div className="stat">
+          <Stat/>
+        </div>
     </StyledContainer>
+
 </main>
   )
 }
@@ -56,21 +61,33 @@ const StyledH1 = styled.h1`
   font-weight: 600;
   color: #fff;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  max-width: 760px;
+  max-width: 860px;
   margin: auto;
   text-align: center;
   text-transform: uppercase;
+  padding: 1rem 3rem; 
+  top: -8px;
   .search{
     width: 100%;
     justify-content:center ;
+    display: flex;
     align-items: center;
-    padding: 1rem 3rem; 
     align-self: center;
+    font-size: 20px;
+    font-weight: lighter;
+    margin: auto;
   }
   @media (max-width:320px){
     top: -60px;
     font-weight: 500;
     line-height: 40px;
+  }
+  @media (max-width:1024px) and  (min-width:430px)  {
+    top: -10px; 
+  }
+
+  @media (max-width:425px)and (min-width: 322px){
+    top: 0px;
   }
 
   @media (max-width: 768px) {
@@ -79,11 +96,7 @@ const StyledH1 = styled.h1`
   }
 `;
 
-const Last = styled.div`
-h3{
-  color: white;
-}
-`
+
 
 
 export default Header
