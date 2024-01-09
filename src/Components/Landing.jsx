@@ -2,11 +2,14 @@ import { useEffect, useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { GoDownload } from "react-icons/go";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Landing = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [columns, setColumns] = useState([[], [], []]);
+  const [downloading, setDownloading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -17,6 +20,7 @@ const Landing = () => {
       console.error('Error fetching data:', error);
     }
   };
+
 
   useEffect(() => {
     fetchData();
@@ -38,6 +42,8 @@ const Landing = () => {
 
    const downloadImage = async (url, id) => {
     try {
+      setDownloading(true);
+
       const response = await fetch(url);
       const blob = await response.blob();
 
@@ -51,10 +57,15 @@ const Landing = () => {
 
       // Revoke the object URL to clean up resources
       window.URL.revokeObjectURL(link.href);
+
+      setDownloading(false);
     } catch (error) {
       console.error('Error downloading image:', error);
+      setDownloading(false);
     }
   };
+
+
   return (
     <Body>
       <div>
@@ -73,15 +84,22 @@ const Landing = () => {
         {columns.map((column, columnIndex) => (
           <Column key={columnIndex}>
             {column.map((item) => (
-              <ImageWrapper key={item.id}>
+              <ImageWrapper className='wrapper' key={item.id}>
                 {/* Placeholder with dynamic aspect ratio */}
                 <Placeholder aspectRatio={getAspectRatio(item.width, item.height)} />
 
                 {/* Actual image with dynamic height */}
-                <Image src={item.urls.regular} alt="" />
-                <DownloadButton onClick={() => downloadImage(item.urls.full, item.id)}>
-                    Download
-                  </DownloadButton>
+                <Image className='image'  src={item.urls.regular} alt="" />
+                  <Dlfooter className="image-footer">
+                <DownloadButton
+                  onClick={() => downloadImage(item.urls.full, item.id)}
+                  disabled={downloading}
+                  >
+                  <Con $loading={downloading}>
+                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> : <Con> Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con> }
+                  </Con>
+              </DownloadButton>
+                  </Dlfooter>
               </ImageWrapper>
             ))}
           </Column>
@@ -98,9 +116,10 @@ const Body =styled.div`
   }
 `
 const Heading = styled.h1`
-  font-size: 30px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  padding: 20px;
+  font-size: 39px;
+  font-family: 'Noto Sans', sans-serif;
+  padding: 30px;
+  font-weight: 400;
 `
 
 const RowContainer = styled.div`
@@ -109,7 +128,7 @@ const RowContainer = styled.div`
   margin: 0 -10px; 
   justify-content: center;
   @media (max-width: 900px) {
-    justify-content: space-between;
+    margin: 0px -35px;
   }
 `;
 
@@ -120,17 +139,25 @@ const Column = styled.div`
   margin: 0 5px; 
   @media (max-width: 900px) {
     flex: 0 0 calc(50% - 20px);
+    margin: 0px 0px;
   }
 
-  @media (max-width: 600px) {
-    flex: 0 0 calc(100% - 20px);
-  }
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
   margin-bottom: 20px; 
   overflow: hidden;
+  cursor: pointer;
+  width:100%;
+
+  @media (max-width: 900px) {
+    margin-bottom: 9px;
+  }
+
+  &:hover .image-footer{
+    bottom: 0px;
+  }
 `;
 
 const Placeholder = styled.div`
@@ -148,6 +175,8 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  overflow: hidden;
 `;
 
 const LoadingPlaceholder = styled.div`
@@ -164,14 +193,58 @@ const getAspectRatio = (width, height) => height / width;
 
 const DownloadButton = styled.button`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #3498db;
+  background-color: #00040f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
   color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 18px;
+  height: 50px;
+  border-radius: 17px;
   cursor: pointer;
+  transition: background-color 0.1s, border ease-in-out, transform 0.1s, box-shadow 5ms, border-color 0.25s;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+`;
+
+const Dlfooter =styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: -100%;
+  padding: 1rem 0.5rem;
+  transition: box-shadow 5ms;
+  background-color: transparent;
+  width: 97%;
+  box-shadow: 0 60px 10px rgba(0, 0, 0, 0.6);
+  height: 60px;
+
+`
+const Con = styled.p`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Rotate animation when in loading state */
+  ${(props) =>
+    props.$loading &&
+    `
+      animation: rotate 1s linear infinite;
+    `}
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export default Landing;

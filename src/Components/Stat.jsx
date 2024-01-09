@@ -1,5 +1,5 @@
 import { stats } from "../Constants/Constant";
-import './Navbar/Style.css';
+import './Navigation/Style.css';
 
 
 function Stat() {

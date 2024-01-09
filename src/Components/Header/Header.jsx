@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import './Header.css';
 import Search from "../Search";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navigation/Navbar";
 import Stat from "../Stat";
-
 
 function Header() {
     
@@ -33,11 +32,11 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 85vh;
   justify-content: center;
   background-color: #000; 
   transition: background-color 0.3s ease;
-  @media (max-width:320px){
+  @media (max-width:360px){
     height: 100vh;
   }
 `;

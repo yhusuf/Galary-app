@@ -13,7 +13,7 @@ body {
 }
 
 .jumbo {
-    -webkit-mask: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    -webkit-mask: radial-gradient(ellipse at 100% 0%, #00040f 40%, transparent 70%);
     --stripes: repeating-linear-gradient(
         100deg,
         #fff 0%,
@@ -44,7 +44,7 @@ body {
 
     filter: blur(10px) invert(100%);
     
-    mask:radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    mask:radial-gradient(ellipse at 100% 0%, #00040f 40%, transparent 70%);
 
     pointer-events: none;
 }

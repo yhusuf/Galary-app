@@ -1,31 +1,19 @@
 import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import {Ai, Airport, Love, Mobile, Dark, War,  Child, Coding, Robot, Creative, Cars, House} from "../assets/index";
+
 
 export const navLinks = [
   {
     id: "cat",
-    title: "Categories",
+    title: "Collections",
+    link: "/Collections/",
   },
   {
-    id: "health",
-    title: "Health & Safety",
+    id: "popular",
+    link:"/Popular/",
+    title: "Popular-search",
   },
 ];
-export const navLink = [
-  {
-    id: "offers",
-    title: "Offers",
-  },
-  {
-    id: "services",
-    title: "Services",
-  },
-  {
-    id: "menu",
-    title: "Menu",
-  },
-];
-
-
 
 export const stats = [
   {
@@ -51,23 +39,27 @@ export const footerLinks = [
     links: [
       {
         name: "Instagram",
-        link: "https://www.hoobank.com/content/",
+        link: "https://www.instagram.com/__yhusuf/?hl=en",
+        target: "_blank" ,
       },
       {
         name: "Facebook",
-        link: "https://www.hoobank.com/how-it-works/",
+        link: "https://twitter.com/YhusufSaka",
+        target: "_blank" ,
       },
       {
         name: "Linkedin",
-        link: "https://www.hoobank.com/create/",
+        link: "https://www.linkedin.com/in/yusuf-saka-918a97284/",
+        target: "_blank" ,
       },
       {
         name: "Twitter",
-        link: "https://www.hoobank.com/explore/",
+        link: "https://twitter.com/YhusufSaka",
+        target: "_blank" ,
       },
       {
         name: "Terms & Services",
-        link: "https://www.hoobank.com/terms-and-services/",
+        link: "/",
       },
     ],
   },
@@ -76,19 +68,19 @@ export const footerLinks = [
     links: [
       {
         name: "Help Center",
-        link: "https://www.hoobank.com/help-center/",
+        link: "/",
       },
       {
         name: "Suggestions",
-        link: "https://www.hoobank.com/suggestions/",
+        link: "/",
       },
       {
         name: "Blog",
-        link: "https://www.hoobank.com/blog/",
+        link: "/",
       },
       {
         name: "Newsletters",
-        link: "https://www.hoobank.com/newsletters/",
+        link: "/",
       },
     ],
   },
@@ -97,7 +89,7 @@ export const footerLinks = [
     links: [
       {
         name: "Become a Partner",
-        link: "https://www.hoobank.com/become-a-partner/",
+        link: "/",
       },
     ],
   },
@@ -107,22 +99,89 @@ export const socialMedia = [
   {
     id: "social-media-1",
     icon: <FaInstagram/>,
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/__yhusuf/?hl=en",
+    target: "_blank" ,
   },
   {
     id: "social-media-2",
     icon: <FaFacebook/>,
-    link: "https://www.facebook.com/",
+    link: "https://twitter.com/YhusufSaka",
+    target: "_blank" ,
   },
   {
     id: "social-media-3",
     icon: <FaTwitter/>,
-    link: "https://www.twitter.com/",
+    link: "https://twitter.com/YhusufSaka",
+    target: "_blank" ,
   },
   {
     id: "social-media-4",
     icon: <FaLinkedin/>,
-    link: "https://www.linkedin.com/",
+    link: "https://www.linkedin.com/in/yusuf-saka-918a97284/",
+    target: "_blank" ,
   },
 ];
 
+export const Image = [
+  {
+    id: "pop-1",
+    image: Ai,
+    name: 'Ai',
+  },
+  {
+    id: "pop-2",
+    image: Child,
+    name: 'Child',
+  },
+  {
+    id: "pop-3",
+    image: Love,
+    name: 'Love',
+  },
+  {
+    id: "pop-4",
+    image: Cars,
+    name: 'Sport cars',
+  },
+  {
+    id: "pop-5",
+    image: Robot,
+    name: 'Robots',
+  },
+  {
+    id: "pop-6",
+    image: Coding,
+    name: 'Coding',
+  },
+  {
+    id: "pop-7",
+    image: House,
+    name: 'House',
+  },
+  {
+    id: "pop-8",
+    image: Airport,
+    name: 'Airport',
+  },
+  {
+    id: "pop-9",
+    image: Mobile,
+    name: 'Mobile',
+  },
+  {
+    id: "pop-10",
+    image: War,
+    name: 'War',
+  },
+  {
+    id: "pop-11",
+    image: Creative,
+    name: 'Creative',
+  },
+  {
+    id: "pop-12",
+    image: Dark,
+    name: 'Dark',
+  },
+
+];

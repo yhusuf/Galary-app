@@ -11,10 +11,11 @@ module.exports = {
       },
       fontFamily: {
         poppins: [ 'Dancing Script', 'cursive'],
+        nopop:[ 'Noto Sans', 'sans-serif'],
       },
     },
     screens: {
-      ssm:"360px",
+      ssm:"310px",
       xs: "480px",
       ss: "659px",
       sm: "768px",

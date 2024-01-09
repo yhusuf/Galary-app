@@ -1,5 +1,6 @@
 import React from 'react';
 import './Style.css';
+import { Link } from 'react-router-dom';
 import { footerLinks, socialMedia} from '../../Constants/Constant';
 
 function Footer() {
@@ -17,7 +18,9 @@ function Footer() {
                     <ul className='list-none mt-4'>
                         {footerlink.links.map ((link,index)=>(
                             <li key={link.name}  className={`font-poppins font-normal text-[16px] leading-[24px] text-white hover:text-[#00f6ff] cursor-pointer ${index !== footerlink.links.length -1 ? 'mb-4 ' : 'mb-0'}`}>
+                             <Link to={link.link} target={link.target} rel="noopener noreferrer">
                                 {link.name}
+                             </Link>
                             </li>
                         ))}
                     </ul>
@@ -32,7 +35,9 @@ function Footer() {
             <div className='flex flex-row mt-6 justify-center item-center text-white md:mt-0'>
                 {socialMedia.map((social, index)=>(
                     <div key={social.id} className={`w-[21px] h-[21px] object-contain cursor-pointer ${index !== socialMedia.length -1 ? 'mr-6 ': 'mr-0'}`}>
+                        <Link to={social.link} target={social.target} rel="noopener noreferrer">                        
                         {social.icon}
+                        </Link>
                     </div>
                 ))}
             </div>
