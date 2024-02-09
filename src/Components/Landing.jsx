@@ -4,6 +4,7 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { GoDownload } from "react-icons/go";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { MdDownloading } from "react-icons/md";
 
 const Landing = () => {
   const [data, setData] = useState([]);
@@ -96,8 +97,18 @@ const Landing = () => {
                   disabled={downloading}
                   >
                   <Con $loading={downloading}>
-                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> : <Con> Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con> }
-                  </Con>
+                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> :(
+                        <>
+                          {window.innerWidth <= 600 ? (
+                            // Display an icon for mobile screens
+                            <MdDownloading style={{ fontSize: '30px', marginLeft: '5px' }} />
+                          ) : (
+                            // Display the Con tag for larger screens
+                            <Con>Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con>
+                          )}
+                        </>
+                      )}
+                      </Con>
               </DownloadButton>
                   </Dlfooter>
               </ImageWrapper>
@@ -225,6 +236,12 @@ const Dlfooter =styled.div`
   box-shadow: 0 60px 10px rgba(0, 0, 0, 0.6);
   height: 60px;
 
+  @media (max-width: 600px) {
+    /* Styles specific to mobile screens */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 `
 const Con = styled.p`
   display: flex;
