@@ -9,12 +9,14 @@ import { motion } from 'framer-motion';
 import { Menu2, Close2 } from '../assets';
 import { GoDownload } from "react-icons/go";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { MdDownloading } from "react-icons/md";
 
 const Searched = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [columns, setColumns] = useState([[], [], []]);
   const [downloading, setDownloading] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let params = useParams();
 
@@ -37,6 +39,16 @@ const Searched = () => {
     fetchData(params.search);
     // eslint-disable-next-line
   }, [params.search, page]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const newColumns = [[], [], []];
@@ -113,7 +125,16 @@ const Searched = () => {
                   disabled={downloading}
                   >
                   <Con $loading={downloading}>
-                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> : <Con> Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con> }
+                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> :(
+                      //Switch between download buttons based on screen width
+                        <>
+                          {windowWidth <= 500 ? (
+                            <MdDownloading style={{ fontSize: '30px', marginLeft: '5px'  }} />
+                          ) : (
+                            <Con>Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con>
+                          )}
+                        </>
+                      )}
                   </Con>
                     </DownloadButton>
                   </Dlfooter>
@@ -219,13 +240,20 @@ const DownloadButton = styled.button`
   align-items: center;
   justify-content: center;
   justify-content: space-between;
+  font-family: 'Dancing Script', 'cursive';
   color: #fff;
   border: none;
-  padding: 18px;
+  padding: 7px;
   height: 50px;
   border-radius: 17px;
   cursor: pointer;
-  transition:background-color .1s,border ease-in-out,transform .1s,box-shadow 5ms,border-color .25s
+  transition:background-color .1s,border ease-in-out,transform .1s,box-shadow 5ms,border-color .25s;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  @media (max-width: 500px) {
+    background-color: transparent;
+  }
 `;
 
 const Dlfooter =styled.div`
@@ -240,7 +268,10 @@ const Dlfooter =styled.div`
   width: 97%;
   box-shadow: 0 60px 10px rgba(0, 0, 0, 0.6);
   height: 60px;
-
+  @media (max-width: 500px) {
+    bottom: 0;
+    width: 100%;
+  }
 `
 
 const Con = styled.p`

@@ -11,6 +11,7 @@ const Landing = () => {
   const [page, setPage] = useState(1);
   const [columns, setColumns] = useState([[], [], []]);
   const [downloading, setDownloading] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const fetchData = async () => {
     try {
@@ -22,6 +23,16 @@ const Landing = () => {
     }
   };
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -98,12 +109,11 @@ const Landing = () => {
                   >
                   <Con $loading={downloading}>
                     {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> :(
+                      //Switch between download buttons based on screen width
                         <>
-                          {window.innerWidth <= 600 ? (
-                            // Display an icon for mobile screens
-                            <MdDownloading style={{ fontSize: '30px', marginLeft: '5px' }} />
+                          {windowWidth <= 500 ? (
+                            <MdDownloading style={{ fontSize: '30px', marginLeft: '5px'  }} />
                           ) : (
-                            // Display the Con tag for larger screens
                             <Con>Download <GoDownload style={{ fontSize: '30px', marginLeft: '5px' }} /></Con>
                           )}
                         </>
@@ -128,7 +138,7 @@ const Body =styled.div`
 `
 const Heading = styled.h1`
   font-size: 39px;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   padding: 30px;
   font-weight: 400;
 `
@@ -211,14 +221,17 @@ const DownloadButton = styled.button`
   justify-content: space-between;
   color: #fff;
   border: none;
-  padding: 18px;
+  padding: 7px;
   height: 50px;
   border-radius: 17px;
   cursor: pointer;
   transition: background-color 0.1s, border ease-in-out, transform 0.1s, box-shadow 5ms, border-color 0.25s;
-
+  font-family: 'Dancing Script', 'cursive';
   &:disabled {
     cursor: not-allowed;
+  }
+  @media (max-width: 500px) {
+    background-color: transparent;
   }
 
 `;
@@ -236,9 +249,7 @@ const Dlfooter =styled.div`
   box-shadow: 0 60px 10px rgba(0, 0, 0, 0.6);
   height: 60px;
 
-  @media (max-width: 600px) {
-    /* Styles specific to mobile screens */
-    position: fixed;
+  @media (max-width: 500px) {
     bottom: 0;
     width: 100%;
   }
