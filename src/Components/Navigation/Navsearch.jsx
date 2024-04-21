@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {navLinks} from  '../../Constants/Constant';
 import { GiFloatingGhost } from "react-icons/gi";
 import Search from '../Search';
-import {NavLink, Link} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom';
 
 
 function Navsearch({bg,tx,Close,Menu}) {
