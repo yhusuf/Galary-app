@@ -1,6 +1,6 @@
 import Ai from "./Ai.jpg";
 import Close from './Close.svg';
-import Menu from './Menu.svg'
+import Menu from './Menu.svg';
 import Airport from "./Airport.jpg";
 import Love from "./Love.jpg";
 import Mobile from "./Mobile.jpg";
