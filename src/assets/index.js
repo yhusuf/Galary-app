@@ -6,7 +6,7 @@ import Love from "./Love.jpg";
 import Mobile from "./Mobile.jpg";
 import Dark from "./Dark.jpg";
 import War from "./War.jpg";
-import Child from "./Child.jpg"
+import Child from "./Child.jpg";
 import Coding from "./Coding.jpg";
 import Robot from "./Robot.jpg";
 import Creative from "./Creative.jpg";
