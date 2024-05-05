@@ -40,17 +40,19 @@ const Landing = () => {
   }, [page]);
 
   useEffect(() => {
-    const newColumns = [...columns];
+    const newColumns = [];
+    const maxColumns = windowWidth <= 500 ? 2 : 3;
+    for (let i = 0; i < maxColumns; i++) {
+      newColumns.push([]);
+    }
     data.forEach((item, index) => {
-      const columnIndex = index % 3;
+      const columnIndex = index % maxColumns;
       if (!newColumns[columnIndex].some(i => i.id === item.id)) {
         newColumns[columnIndex].push(item);
       }
     });
     setColumns(newColumns);
-  },
-  //eslint-disable-next-line
-   [data]);
+  }, [data, windowWidth]);
 
    const downloadImage = async (url, id) => {
     try {
