@@ -51,19 +51,20 @@ const Searched = () => {
   }, []);
 
   useEffect(() => {
-    const newColumns = [[], [], []];
-    const uniqueIds = new Set();
-
+    const newColumns = [];
+    const maxColumns = windowWidth <= 500 ? 2 : 3;
+    for (let i = 0; i < maxColumns; i++) {
+      newColumns.push([]);
+    }
     data.forEach((item, index) => {
-      const columnIndex = index % 3;
-      if (!uniqueIds.has(item.id)) {
-        uniqueIds.add(item.id);
+      const columnIndex = index % maxColumns;
+      if (!newColumns[columnIndex].some(i => i.id === item.id)) {
         newColumns[columnIndex].push(item);
       }
     });
-
     setColumns(newColumns);
-  }, [data]);
+  }, [data, windowWidth]);
+
 
   const downloadImage = async (url, id) => {
     try {

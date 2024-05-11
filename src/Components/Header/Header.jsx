@@ -37,7 +37,7 @@ const StyledContainer = styled.div`
   background-color: #000; 
   transition: background-color 0.3s ease;
   @media (max-width:360px){
-    height: 100vh;
+    height: 85vh;
   }
 `;
 const AbsoluteOverlay = styled.div`
@@ -77,7 +77,6 @@ const StyledH1 = styled.h1`
     margin: auto;
   }
   @media (max-width:320px){
-    top: -60px;
     font-weight: 500;
     line-height: 40px;
   }
