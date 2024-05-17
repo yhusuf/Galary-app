@@ -10,7 +10,7 @@ const Landing = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [columns, setColumns] = useState([[], [], []]);
-  const [downloading, setDownloading] = useState(false);
+  const [downloading, setDownloading] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const fetchData = async () => {
@@ -54,9 +54,9 @@ const Landing = () => {
     setColumns(newColumns);
   }, [data, windowWidth]);
 
-   const downloadImage = async (url, id) => {
+  const downloadImage = async (url, id) => {
     try {
-      setDownloading(true);
+      setDownloading((prevState) => ({ ...prevState, [id]: true })); // Update state for specific image
 
       const response = await fetch(url);
       const blob = await response.blob();
@@ -69,13 +69,12 @@ const Landing = () => {
       link.click();
       document.body.removeChild(link);
 
-      // Revoke the object URL to clean up resources
       window.URL.revokeObjectURL(link.href);
 
-      setDownloading(false);
+      setDownloading((prevState) => ({ ...prevState, [id]: false })); // Reset state for specific image
     } catch (error) {
       console.error('Error downloading image:', error);
-      setDownloading(false);
+      setDownloading((prevState) => ({ ...prevState, [id]: false })); // Reset state for specific image
     }
   };
 
@@ -107,10 +106,10 @@ const Landing = () => {
                   <Dlfooter className="image-footer">
                 <DownloadButton
                   onClick={() => downloadImage(item.urls.full, item.id)}
-                  disabled={downloading}
+                  disabled={downloading[item.id]}
                   >
-                  <Con $loading={downloading}>
-                    {downloading ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> :(
+                  <Con $loading={downloading[item.id]}>
+                    {downloading[item.id] ? <AiOutlineLoading3Quarters style={{ fontSize: '30px', marginLeft: '5px' }} /> :(
                       //Switch between download buttons based on screen width
                         <>
                           {windowWidth <= 500 ? (
